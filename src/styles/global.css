@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-slate-800 min-h-screen;
+    font-family: 'Fredoka', system-ui, -apple-system, sans-serif;
+    /* Cheerful pastel-rainbow sky that stays put while scrolling. */
+    background:
+      radial-gradient(1000px 500px at 10% -5%, #c4b5fd 0%, transparent 55%),
+      radial-gradient(1000px 500px at 95% 0%, #fbcfe8 0%, transparent 55%),
+      linear-gradient(160deg, #dbeafe 0%, #ede9fe 45%, #fce7f3 75%, #fef3c7 100%);
+    background-attachment: fixed;
+    /* Kid-friendly: text stays an arrow (no "type here" I-beam), can't be
+       accidentally selected, and taps don't flash a highlight box. */
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Real answer fields still behave like text inputs. */
+  input,
+  textarea {
+    cursor: text;
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+@layer components {
+  /* Chunky, pressable "toy" buttons. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-lg
+           text-white bg-grape shadow-toy transition
+           hover:brightness-105 active:translate-y-[5px] active:shadow-none
+           disabled:opacity-60 disabled:active:translate-y-0 disabled:active:shadow-toy;
+  }
+  .btn-green { @apply bg-grass; }
+  .btn-pink { @apply bg-bubblegum; }
+  .btn-orange { @apply bg-tangerine; }
+  .btn-ghost {
+    @apply bg-white text-grape border-[3px] border-violet-200 hover:border-grape;
+  }
+
+  .card {
+    @apply bg-white rounded-[28px] p-5 shadow-card;
+  }
+  .card-click {
+    @apply transition duration-150 cursor-pointer hover:-translate-y-1.5 hover:rotate-1;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-sm
+           text-white shadow;
+  }
+
+  .option {
+    @apply w-full text-left px-5 py-4 rounded-2xl bg-white border-[3px] border-slate-200
+           text-lg font-semibold text-slate-700 shadow-toy transition
+           hover:-translate-y-0.5 hover:border-violet-300;
+  }
+
+  .field {
+    @apply w-full px-5 py-4 rounded-2xl border-[3px] border-slate-200 bg-white
+           text-lg font-semibold text-slate-700 shadow-toy focus:outline-none focus:border-grape;
+  }
+
+  .spinner {
+    @apply w-12 h-12 border-4 border-violet-200 border-t-grape rounded-full animate-spin;
+  }
+}
