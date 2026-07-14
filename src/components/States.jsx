@@ -1,3 +1,5 @@
+import { BASE } from '../api/client';
+
 /** Friendly loading / error / empty states for young learners. */
 
 export function Loader({ label = 'Loading…' }) {
@@ -24,7 +26,7 @@ export function ErrorState({ error, onRetry }) {
         </button>
       )}
       <p className="text-sm text-slate-500">
-        Make sure the game server is running at <b>localhost:4000</b>.
+        Could not reach the game server at <b>{BASE}</b>.
       </p>
     </div>
   );
