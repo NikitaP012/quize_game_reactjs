@@ -4,6 +4,8 @@ import SubjectsPage from './pages/SubjectsPage';
 import ChaptersPage from './pages/ChaptersPage';
 import LevelsPage from './pages/LevelsPage';
 import QuizPage from './pages/QuizPage';
+import GuestEntry from './pages/GuestEntry';
+import LeaderboardPage from './pages/LeaderboardPage';
 
 export default function App() {
   return (
@@ -12,9 +14,14 @@ export default function App() {
       <main className="max-w-5xl mx-auto px-5 pb-24 pt-6">
         <Routes>
           <Route path="/" element={<SubjectsPage />} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="/subject/:subjectId" element={<ChaptersPage />} />
           <Route path="/chapter/:chapterId" element={<LevelsPage />} />
           <Route path="/chapter/:chapterId/level/:levelIndex" element={<QuizPage />} />
+          {/* Manager's entry link: /{school_id}/{class}/{user_id}/{user_name}.
+              Static routes above rank higher, so this only matches genuine
+              4-segment entry URLs. */}
+          <Route path="/:schoolId/:classId/:userId/:userName" element={<GuestEntry />} />
           <Route path="*" element={<p className="text-slate-400">Page not found.</p>} />
         </Routes>
       </main>

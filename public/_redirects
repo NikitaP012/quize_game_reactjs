@@ -1,0 +1,3 @@
+# SPA fallback: serve index.html for every path so client-side routes like
+# /{school_id}/{class}/{user_id}/{user_name} deep-link correctly on Render.
+/*    /index.html   200

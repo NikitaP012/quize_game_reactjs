@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { gameApi } from '../api/game';
 import { useAsync } from '../hooks/useAsync';
 import { useProgress } from '../context/ProgressContext';
+import { useIdentity } from '../context/IdentityContext';
 import { Loader, ErrorState } from '../components/States';
 import QuestionCard from '../components/QuestionCard';
 import ResultView from './ResultView';
@@ -11,6 +12,7 @@ export default function QuizPage() {
   const { chapterId, levelIndex } = useParams();
   const li = parseInt(levelIndex, 10);
   const { recordResult, getLevelState } = useProgress();
+  const { identity } = useIdentity();
 
   const fetcher = useCallback(() => gameApi.getQuiz(chapterId, li), [chapterId, li]);
   const { data: quiz, loading, error, reload } = useAsync(fetcher, [chapterId, li]);
@@ -48,7 +50,7 @@ export default function QuizPage() {
         answer: answers[qq.question_id] ?? null,
       }));
       const isReplay = Boolean(getLevelState(chapterId, li)?.cleared);
-      const res = await gameApi.submit(chapterId, li, payload, isReplay);
+      const res = await gameApi.submit(chapterId, li, payload, isReplay, identity);
       recordResult(chapterId, li, res);
       setResult(res);
       window.scrollTo({ top: 0, behavior: 'smooth' });

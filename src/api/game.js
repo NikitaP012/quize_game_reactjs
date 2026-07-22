@@ -9,7 +9,8 @@ export const gameApi = {
   getLevels: (chapterId) => apiGet(`/chapters/${chapterId}/levels`),
   getQuiz: (chapterId, levelIndex) =>
     apiGet(`/chapters/${chapterId}/levels/${levelIndex}/quiz`),
-  submit: (chapterId, levelIndex, answers, isReplay) =>
-    apiPost(`/chapters/${chapterId}/levels/${levelIndex}/submit`, { answers, isReplay }),
+  submit: (chapterId, levelIndex, answers, isReplay, identity) =>
+    apiPost(`/chapters/${chapterId}/levels/${levelIndex}/submit`, { answers, isReplay, identity }),
   getRank: (totalXp) => apiPost('/progress/rank', { totalXp }),
+  getSchoolLeaderboard: (limit = 10) => apiGet(`/leaderboard/schools?limit=${limit}`),
 };

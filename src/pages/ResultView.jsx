@@ -5,7 +5,9 @@ export default function ResultView({ result, quiz, chapterId, onRetry }) {
   const navigate = useNavigate();
   const qById = new Map(quiz.questions.map((q) => [q.question_id, q]));
 
-  const stars = result.perfect ? 3 : result.passed ? 2 : result.accuracy >= 40 ? 1 : 0;
+  // Prefer the server's trusted star rating; fall back for older responses.
+  const stars =
+    result.stars ?? (result.perfect ? 3 : result.passed ? 2 : result.accuracy >= 40 ? 1 : 0);
   const headline = result.perfect
     ? 'PERFECT! You are a star! 🌟'
     : result.passed

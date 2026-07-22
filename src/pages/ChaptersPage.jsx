@@ -2,13 +2,15 @@ import { Link, useParams } from 'react-router-dom';
 import { useCallback } from 'react';
 import { gameApi } from '../api/game';
 import { useAsync } from '../hooks/useAsync';
+import { useIdentity } from '../context/IdentityContext';
 import { Loader, ErrorState } from '../components/States';
 import { colorAt } from '../utils/palette';
 
 export default function ChaptersPage() {
   const { subjectId } = useParams();
-  const fetcher = useCallback(() => gameApi.getChapters(subjectId, 1), [subjectId]);
-  const { data, loading, error, reload } = useAsync(fetcher, [subjectId]);
+  const { gradeId } = useIdentity();
+  const fetcher = useCallback(() => gameApi.getChapters(subjectId, gradeId), [subjectId, gradeId]);
+  const { data, loading, error, reload } = useAsync(fetcher, [subjectId, gradeId]);
 
   if (loading) return <Loader label="Opening the book…" />;
   if (error) return <ErrorState error={error} onRetry={reload} />;

@@ -20,6 +20,7 @@ export default function TopBar() {
         </Link>
 
         <div className="flex items-center gap-2">
+          <Link to="/leaderboard" className="chip bg-grass hover:brightness-105" title="Top schools">🏆</Link>
           <span className="chip bg-grape" title="Your rank">⭐ {rank.rank}</span>
           <span className="chip bg-sky2" title="Experience points">⚡ {totalXp}</span>
           <span className="chip bg-sun text-amber-900" title="Coins">🪙 {coins}</span>
